@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: skilldemand-backend
+    name: skill-demand-ai
     env: python
     plan: free
     buildCommand: "pip install -r backend/requirements.txt"
@@ -8,13 +8,3 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: "3.11.0"
-      - key: DATABASE_URL
-        fromDatabase:
-          name: skilldemand-db
-          property: connectionString
-
-databases:
-  - name: skilldemand-db
-    plan: free
-    databaseName: skilldemand
-    user: skilldemand_user

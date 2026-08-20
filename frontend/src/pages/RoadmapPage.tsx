@@ -7,8 +7,9 @@ import { RoadmapStep } from '../types';
 export const RoadmapPage: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [targetJob, setTargetJob] = useState('Python Developer');
-  const [steps, setSteps] = useState<RoadmapStep[]>([]);
+  const [steps, setSteps] = useState<RoadmapStep[]>();
   const [overallFit, setOverallFit] = useState<string | null>(null);
 
   // AI Agent Role Generator State
@@ -34,13 +35,14 @@ export const RoadmapPage: React.FC = () => {
 
   const fetchRoadmap = async () => {
     setLoading(true);
+    setError(null);
     try {
       const res = await api.getRoadmap();
       setTargetJob(res.target_job);
       setSteps(res.steps);
       setAgentRole(res.target_job);
-    } catch (err) {
-      console.error(err);
+    } catch (err: any) {
+      setError(err?.message || 'Could not connect to backend. Make sure the Render service is running.');
     } finally {
       setLoading(false);
     }
@@ -197,7 +199,21 @@ export const RoadmapPage: React.FC = () => {
           <RefreshCw className="w-8 h-8 animate-spin text-indigo-400" />
           <span>Synthesizing custom learning roadmap for {agentRole}...</span>
         </div>
-      ) : steps.length === 0 ? (
+      ) : error ? (
+        <div className="bg-slate-900 border border-red-500/30 p-8 rounded-3xl text-center space-y-4 max-w-lg mx-auto">
+          <div className="w-14 h-14 rounded-2xl bg-red-600/20 border border-red-500/30 flex items-center justify-center mx-auto text-red-400">
+            <Sparkles className="w-7 h-7" />
+          </div>
+          <h3 className="text-xl font-bold text-white">Backend Unreachable</h3>
+          <p className="text-xs text-red-400 leading-relaxed">{error}</p>
+          <button
+            onClick={fetchRoadmap}
+            className="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs flex items-center gap-2 mx-auto"
+          >
+            <RefreshCw className="w-4 h-4" /> Retry
+          </button>
+        </div>
+      ) : (steps ?? []).length === 0 ? (
         <div className="bg-slate-900 border border-slate-800 p-8 rounded-3xl text-center space-y-4 max-w-lg mx-auto">
           <div className="w-14 h-14 rounded-2xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center mx-auto text-indigo-400">
             <Sparkles className="w-7 h-7" />
