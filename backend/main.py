@@ -14,6 +14,9 @@ Base.metadata.create_all(bind=engine)
 db = SessionLocal()
 try:
     run_all_seeds(db)
+    print("✅ Database seeded successfully.")
+except Exception as e:
+    print(f"⚠️ Seed data warning (non-fatal): {e}")
 finally:
     db.close()
 
