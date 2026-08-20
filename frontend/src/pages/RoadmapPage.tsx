@@ -9,7 +9,7 @@ export const RoadmapPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [targetJob, setTargetJob] = useState('Python Developer');
-  const [steps, setSteps] = useState<RoadmapStep[]>();
+  const [steps, setSteps] = useState<RoadmapStep[]>([]);
   const [overallFit, setOverallFit] = useState<string | null>(null);
 
   // AI Agent Role Generator State
@@ -213,7 +213,7 @@ export const RoadmapPage: React.FC = () => {
             <RefreshCw className="w-4 h-4" /> Retry
           </button>
         </div>
-      ) : (steps ?? []).length === 0 ? (
+      ) : steps.length === 0 ? (
         <div className="bg-slate-900 border border-slate-800 p-8 rounded-3xl text-center space-y-4 max-w-lg mx-auto">
           <div className="w-14 h-14 rounded-2xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center mx-auto text-indigo-400">
             <Sparkles className="w-7 h-7" />
