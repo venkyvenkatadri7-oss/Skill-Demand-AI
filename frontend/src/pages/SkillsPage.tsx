@@ -9,6 +9,9 @@ export const SkillsPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [newSkillName, setNewSkillName] = useState('');
   const [newProficiency, setNewProficiency] = useState<'Beginner' | 'Intermediate' | 'Advanced'>('Intermediate');
+  const [addingSkill, setAddingSkill] = useState(false);
+  const [addError, setAddError] = useState<string | null>(null);
+  const [addSuccess, setAddSuccess] = useState(false);
 
   const fetchSkills = async () => {
     setLoading(true);
@@ -29,12 +32,19 @@ export const SkillsPage: React.FC = () => {
   const handleAddSkill = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newSkillName.trim()) return;
+    setAddingSkill(true);
+    setAddError(null);
+    setAddSuccess(false);
     try {
       await api.addSkill(newSkillName.trim(), newProficiency);
       setNewSkillName('');
+      setAddSuccess(true);
+      setTimeout(() => setAddSuccess(false), 2000);
       fetchSkills();
-    } catch (err) {
-      console.error(err);
+    } catch (err: any) {
+      setAddError(err?.message || 'Failed to add skill. Please check your connection.');
+    } finally {
+      setAddingSkill(false);
     }
   };
 
@@ -108,11 +118,21 @@ export const SkillsPage: React.FC = () => {
           </select>
           <button
             type="submit"
-            className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-lg shadow-indigo-600/20"
+            disabled={addingSkill}
+            className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-lg shadow-indigo-600/20"
           >
-            <Plus className="w-4 h-4" /> Add Skill
+            {addingSkill ? (
+              <><RefreshCw className="w-4 h-4 animate-spin" /> Adding...</>
+            ) : addSuccess ? (
+              <><Check className="w-4 h-4" /> Added!</>
+            ) : (
+              <><Plus className="w-4 h-4" /> Add Skill</>
+            )}
           </button>
         </form>
+        {addError && (
+          <p className="mt-2 text-xs text-red-400 font-medium">{addError}</p>
+        )}
       </div>
 
       {/* Editable Skill Tags Display (Prompt Spec #7) */}
