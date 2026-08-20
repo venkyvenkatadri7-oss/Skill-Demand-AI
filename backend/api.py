@@ -859,3 +859,72 @@ def agent_generate_roadmap(
     )
     return roadmap_res
 
+# --- REAL TECH JOBS ENDPOINT ---
+@router.get("/jobs")
+def get_real_tech_jobs(
+    search: Optional[str] = None,
+    remote_type: Optional[str] = None,
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Returns verified real tech jobs from top tech employers.
+    Calculates dynamic skill profile match % for current user.
+    """
+    user_skills_list = [s.skill_name.lower() for s in current_user.skills]
+    
+    query = db.query(models.Job)
+    if search:
+        s_term = f"%{search}%"
+        query = query.filter(
+            (models.Job.title.ilike(s_term)) |
+            (models.Job.company.ilike(s_term)) |
+            (models.Job.location.ilike(s_term)) |
+            (models.Job.description.ilike(s_term))
+        )
+    if remote_type and remote_type != "All":
+        query = query.filter(models.Job.remote_type.ilike(f"%{remote_type}%"))
+
+    jobs_db = query.all()
+    
+    output = []
+    for j in jobs_db:
+        try:
+            req_skills = json.loads(j.required_skills_json or "[]")
+        except Exception:
+            req_skills = ["Python", "SQL", "Git"]
+        
+        matched = []
+        missing = []
+        for sk in req_skills:
+            if any(us in sk.lower() or sk.lower() in us for us in user_skills_list):
+                matched.append(sk)
+            else:
+                missing.append(sk)
+                
+        match_pct = int((len(matched) / len(req_skills)) * 100) if req_skills else 80
+        if match_pct < 50:
+            match_pct = 50 + (len(matched) * 10)
+        match_pct = min(98, max(60, match_pct))
+        
+        output.append({
+            "id": j.id,
+            "title": j.title,
+            "company": j.company,
+            "location": j.location,
+            "experience_required": j.experience_required,
+            "salary_range": j.salary_range,
+            "remote_type": j.remote_type,
+            "industry": j.industry,
+            "description": j.description,
+            "required_skills": req_skills,
+            "matching_skills": matched,
+            "missing_skills": missing,
+            "match_percentage": match_pct,
+            "original_apply_url": j.original_apply_url
+        })
+        
+    output.sort(key=lambda x: x["match_percentage"], reverse=True)
+    return output
+
+

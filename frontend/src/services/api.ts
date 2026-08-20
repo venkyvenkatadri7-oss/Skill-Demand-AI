@@ -279,6 +279,90 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
         suggestions: ['Add Docker containerization project experience to resume to boost ATS rank.']
       } as unknown as T;
     }
+    if (endpoint.startsWith('/jobs')) {
+      return [
+        {
+          id: 1,
+          title: 'Software Engineer - Backend (Python / FastAPI)',
+          company: 'Stripe',
+          location: 'San Francisco, CA, USA / Remote',
+          experience_required: '1-3 years',
+          salary_range: '$170,000 - $220,000 / year',
+          remote_type: 'Remote',
+          industry: 'Fintech',
+          description: 'Join Stripe\'s core infrastructure team building microservices using Python, FastAPI, PostgreSQL, and distributed caching.',
+          required_skills: ['Python', 'SQL', 'FastAPI', 'REST API', 'Docker'],
+          matching_skills: ['Python', 'SQL', 'FastAPI', 'REST API'],
+          missing_skills: ['Docker'],
+          match_percentage: 88,
+          original_apply_url: 'https://stripe.com/jobs'
+        },
+        {
+          id: 2,
+          title: 'Backend AI Systems Engineer (Python / PyTorch)',
+          company: 'OpenAI',
+          location: 'San Francisco, CA, USA',
+          experience_required: '1-4 years',
+          salary_range: '$190,000 - $260,000 / year',
+          remote_type: 'Hybrid',
+          industry: 'Artificial Intelligence',
+          description: 'Develop high-throughput inference APIs, model serving infrastructure, and vector store pipelines supporting ChatGPT.',
+          required_skills: ['Python', 'Machine Learning', 'PyTorch', 'FastAPI'],
+          matching_skills: ['Python', 'FastAPI'],
+          missing_skills: ['Machine Learning', 'PyTorch'],
+          match_percentage: 82,
+          original_apply_url: 'https://openai.com/careers'
+        },
+        {
+          id: 3,
+          title: 'Software Development Engineer (Python / AWS)',
+          company: 'Amazon Web Services (AWS)',
+          location: 'Austin, TX, USA / Remote',
+          experience_required: '0-2 years',
+          salary_range: '$145,000 - $190,000 / year',
+          remote_type: 'Hybrid',
+          industry: 'Cloud Computing',
+          description: 'Architect cloud-native backend services, automated CI/CD deployments, and scalable AWS cloud infrastructure APIs.',
+          required_skills: ['Python', 'AWS', 'Docker', 'REST API', 'SQL'],
+          matching_skills: ['Python', 'SQL', 'REST API'],
+          missing_skills: ['AWS', 'Docker'],
+          match_percentage: 78,
+          original_apply_url: 'https://amazon.jobs'
+        },
+        {
+          id: 4,
+          title: 'Software Engineer II - Java & Azure Cloud',
+          company: 'Microsoft',
+          location: 'Redmond, WA, USA / Remote',
+          experience_required: '1-3 years',
+          salary_range: '$150,000 - $195,000 / year',
+          remote_type: 'Hybrid',
+          industry: 'Enterprise Software',
+          description: 'Build high-throughput enterprise backends and cloud microservices supporting Azure cloud platform services.',
+          required_skills: ['Java', 'SQL', 'REST API', 'Docker'],
+          matching_skills: ['SQL', 'REST API'],
+          missing_skills: ['Java', 'Docker'],
+          match_percentage: 75,
+          original_apply_url: 'https://careers.microsoft.com'
+        },
+        {
+          id: 5,
+          title: 'Software Engineer - AI Platform & Infrastructure',
+          company: 'Google',
+          location: 'Mountain View, CA, USA / Bengaluru, India',
+          experience_required: '1-4 years',
+          salary_range: '$165,000 - $225,000 / year',
+          remote_type: 'Hybrid',
+          industry: 'Cloud & AI Search',
+          description: 'Develop scalable distributed machine learning platforms, Gemini model integration layers, and high-performance server backend services.',
+          required_skills: ['Python', 'Machine Learning', 'PyTorch', 'Pandas'],
+          matching_skills: ['Python'],
+          missing_skills: ['Machine Learning', 'PyTorch', 'Pandas'],
+          match_percentage: 72,
+          original_apply_url: 'https://careers.google.com/jobs/'
+        }
+      ] as unknown as T;
+    }
     return { status: 'success' } as unknown as T;
   }
 }

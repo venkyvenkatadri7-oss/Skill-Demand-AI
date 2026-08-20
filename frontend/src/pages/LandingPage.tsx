@@ -24,7 +24,7 @@ export const LandingPage: React.FC = () => {
         </div>
 
         <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight">
-          AI Workforce Gap Radar
+          SkillDemand AI
         </h1>
 
         <p className="text-xl sm:text-2xl font-semibold text-indigo-400 mt-3 tracking-wide">

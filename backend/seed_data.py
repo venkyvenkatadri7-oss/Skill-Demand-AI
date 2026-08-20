@@ -300,7 +300,7 @@ def seed_jobs(db: Session):
             "industry": "Fintech / Payment Processing",
             "description": "Join Stripe's core infrastructure team building microservices using Python, FastAPI, PostgreSQL, and distributed caching to power global commerce.",
             "required_skills": ["Python", "SQL", "FastAPI", "REST API", "Docker", "PostgreSQL", "Git"],
-            "original_apply_url": "https://stripe.com/jobs/search?q=python",
+            "original_apply_url": "https://stripe.com/jobs",
             "is_demo": False
         },
         {
@@ -313,24 +313,24 @@ def seed_jobs(db: Session):
             "industry": "Artificial Intelligence",
             "description": "Develop high-throughput inference APIs, model serving infrastructure, and vector store pipelines supporting ChatGPT and enterprise LLMs.",
             "required_skills": ["Python", "Machine Learning", "PyTorch", "FastAPI", "REST API", "Docker", "Git"],
-            "original_apply_url": "https://openai.com/careers/search",
+            "original_apply_url": "https://openai.com/careers",
             "is_demo": False
         },
         {
             "title": "Software Development Engineer (Python / AWS)",
             "company": "Amazon Web Services (AWS)",
-            "location": "Austin, TX, USA",
+            "location": "Austin, TX, USA / Remote",
             "experience_required": "0-2 years",
             "salary_range": "$145,000 - $190,000 / year",
             "remote_type": "Hybrid",
             "industry": "Cloud Computing",
             "description": "Architect cloud-native backend services, automated CI/CD deployments, and scalable AWS cloud infrastructure APIs.",
             "required_skills": ["Python", "AWS", "Docker", "REST API", "SQL", "Git"],
-            "original_apply_url": "https://amazon.jobs/en/search?base_query=python",
+            "original_apply_url": "https://amazon.jobs",
             "is_demo": False
         },
         {
-            "title": "Software Engineer II - Java & Spring Boot",
+            "title": "Software Engineer II - Java & Azure Cloud",
             "company": "Microsoft",
             "location": "Redmond, WA, USA / Remote",
             "experience_required": "1-3 years",
@@ -339,7 +339,7 @@ def seed_jobs(db: Session):
             "industry": "Enterprise Software",
             "description": "Build high-throughput enterprise backends and cloud microservices supporting Azure cloud platform services using Java 17 and SQL.",
             "required_skills": ["Java", "SQL", "REST API", "Docker", "Data Structures & Algorithms", "Git"],
-            "original_apply_url": "https://careers.microsoft.com/v2/global/en/home.html",
+            "original_apply_url": "https://careers.microsoft.com",
             "is_demo": False
         },
         {
@@ -356,20 +356,20 @@ def seed_jobs(db: Session):
             "is_demo": False
         },
         {
-            "title": "Research Engineer - Deep Learning",
-            "company": "Google DeepMind",
-            "location": "London, UK",
+            "title": "Software Engineer - AI Platform & Infrastructure",
+            "company": "Google",
+            "location": "Mountain View, CA, USA / Bengaluru, India",
             "experience_required": "1-4 years",
-            "salary_range": "£95,000 - £130,000 / year",
+            "salary_range": "$165,000 - $225,000 / year",
             "remote_type": "Hybrid",
-            "industry": "AI Research",
-            "description": "Implement cutting-edge deep learning research algorithms, neural networks, and scalable training frameworks with Python and PyTorch.",
+            "industry": "Cloud & AI Search",
+            "description": "Develop scalable distributed machine learning platforms, Gemini model integration layers, and high-performance server backend services.",
             "required_skills": ["Python", "Machine Learning", "PyTorch", "Pandas", "NumPy", "Git"],
-            "original_apply_url": "https://careers.google.com/jobs/results/?q=machine%20learning",
+            "original_apply_url": "https://careers.google.com/jobs/",
             "is_demo": False
         },
         {
-            "title": "Data & Product Analytics Engineer",
+            "title": "Data & Systems Analytics Engineer",
             "company": "Uber",
             "location": "Hyderabad, India / Remote",
             "experience_required": "0-3 years",
@@ -378,20 +378,46 @@ def seed_jobs(db: Session):
             "industry": "Mobility & Tech",
             "description": "Transform massive mobility dataset telemetry into predictive analytics, statistical models, and executive dashboards using SQL and Python.",
             "required_skills": ["Python", "SQL", "Pandas", "NumPy", "Git"],
-            "original_apply_url": "https://www.uber.com/us/en/careers/list/",
+            "original_apply_url": "https://www.uber.com/careers",
             "is_demo": False
         },
         {
-            "title": "Cloud Infrastructure & Container Reliability Engineer",
+            "title": "Cloud Infrastructure & SRE Specialist",
             "company": "Netflix",
             "location": "Los Gatos, CA, USA / Remote",
             "experience_required": "2-4 years",
             "salary_range": "$185,000 - $245,000 / year",
             "remote_type": "Remote",
-            "industry": "Entertainment & Streaming Tech",
+            "industry": "Streaming Media",
             "description": "Manage global container orchestration, Kubernetes clusters, CI/CD automated deployment pipelines, and multi-region AWS infrastructure.",
             "required_skills": ["AWS", "Docker", "Kubernetes", "Linux", "CI/CD", "Python", "Git"],
-            "original_apply_url": "https://jobs.netflix.com/search?q=cloud",
+            "original_apply_url": "https://jobs.netflix.com/",
+            "is_demo": False
+        },
+        {
+            "title": "AI Hardware Software Engineer (CUDA / Python)",
+            "company": "NVIDIA",
+            "location": "Santa Clara, CA, USA / Remote",
+            "experience_required": "1-3 years",
+            "salary_range": "$175,000 - $230,000 / year",
+            "remote_type": "Hybrid",
+            "industry": "AI Semiconductors",
+            "description": "Optimize GPU deep learning acceleration libraries, CUDA kernel bindings, and LLM inference pipelines using C++ and Python.",
+            "required_skills": ["Python", "C++", "Machine Learning", "PyTorch", "Git"],
+            "original_apply_url": "https://www.nvidia.com/en-us/about-nvidia/careers/",
+            "is_demo": False
+        },
+        {
+            "title": "iOS & macOS Systems Software Engineer",
+            "company": "Apple",
+            "location": "Cupertino, CA, USA",
+            "experience_required": "1-3 years",
+            "salary_range": "$160,000 - $215,000 / year",
+            "remote_type": "On-site",
+            "industry": "Consumer Tech",
+            "description": "Design core OS components, framework APIs, and high-performance system routines powering Apple silicon devices.",
+            "required_skills": ["Swift", "Python", "C++", "REST API", "Git"],
+            "original_apply_url": "https://jobs.apple.com/",
             "is_demo": False
         },
         {
@@ -408,16 +434,29 @@ def seed_jobs(db: Session):
             "is_demo": False
         },
         {
-            "title": "Data Warehouse & SQL Engineer",
-            "company": "Snowflake",
-            "location": "San Mateo, CA, USA",
-            "experience_required": "1-3 years",
-            "salary_range": "$160,00,000 - $205,000 / year",
+            "title": "Full Stack Web Developer (React & Node.js)",
+            "company": "Infosys",
+            "location": "Hyderabad / Pune, India",
+            "experience_required": "0-3 years",
+            "salary_range": "₹9,00,000 - ₹15,50,000 / year",
             "remote_type": "Hybrid",
-            "industry": "Data Cloud",
-            "description": "Build high-performance cloud data warehouses, query optimization routines, and automated SQL data pipelines.",
-            "required_skills": ["SQL", "Python", "Pandas", "PostgreSQL", "Git"],
-            "original_apply_url": "https://www.snowflake.com/en/company/careers/",
+            "industry": "Global Tech Services",
+            "description": "Build high-performance web user interface portals using React, TypeScript, Node.js, and cloud REST microservices.",
+            "required_skills": ["React", "JavaScript", "TypeScript", "Node.js", "HTML/CSS", "Git"],
+            "original_apply_url": "https://www.infosys.com/careers",
+            "is_demo": False
+        },
+        {
+            "title": "Cloud Platform Software Engineer",
+            "company": "Adobe",
+            "location": "San Jose, CA, USA / Remote",
+            "experience_required": "1-3 years",
+            "salary_range": "$155,000 - $200,000 / year",
+            "remote_type": "Remote",
+            "industry": "Digital Media & Cloud",
+            "description": "Construct cloud services for Creative Cloud & Document Cloud platforms utilizing microservice architectures and AWS cloud APIs.",
+            "required_skills": ["Java", "Python", "AWS", "REST API", "Docker", "Git"],
+            "original_apply_url": "https://careers.adobe.com/",
             "is_demo": False
         }
     ]

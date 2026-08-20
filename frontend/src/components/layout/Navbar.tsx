@@ -5,7 +5,7 @@ import {
   LayoutDashboard,
   Award,
   BookOpen,
-  MapPin,
+  Briefcase,
   User as UserIcon,
   LogOut,
   Settings,
@@ -34,7 +34,7 @@ export const Navbar: React.FC<NavbarProps> = ({ userProfile, onLogout, primaryTa
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
     { name: 'My Skills', path: '/skills', icon: Award },
     { name: 'Tests & Interview', path: '/tests', icon: BookOpen },
-    { name: 'Workforce Radar', path: '/radar', icon: MapPin },
+    { name: 'Jobs', path: '/jobs', icon: Briefcase },
     { name: 'Roadmap', path: '/roadmap', icon: Sparkles },
   ];
 
@@ -53,13 +53,13 @@ export const Navbar: React.FC<NavbarProps> = ({ userProfile, onLogout, primaryTa
               </div>
               <div>
                 <span className="font-bold text-lg text-white tracking-tight flex items-center gap-1.5">
-                  Workforce Gap Radar
+                  SkillDemand
                   <span className="text-[10px] uppercase font-extrabold tracking-wider bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 px-1.5 py-0.5 rounded">
                     AI
                   </span>
                 </span>
                 <p className="text-[11px] text-slate-400 hidden sm:block">
-                  Career Intelligence Platform
+                  AI Workforce Gap Radar
                 </p>
               </div>
             </div>

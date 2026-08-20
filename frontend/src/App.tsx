@@ -8,7 +8,7 @@ import { OnboardingPage } from './pages/OnboardingPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { SkillsPage } from './pages/SkillsPage';
 import { TestsPage } from './pages/TestsPage';
-import { RadarPage } from './pages/RadarPage';
+import { JobsPage } from './pages/JobsPage';
 import { RoadmapPage } from './pages/RoadmapPage';
 import { api, getAuthToken, removeAuthToken } from './services/api';
 import { Profile } from './types';
@@ -73,7 +73,7 @@ const AppContent: React.FC = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#0b0f19] flex items-center justify-center text-indigo-400 font-semibold text-sm">
-        Initializing AI Workforce Gap Radar...
+        Initializing SkillDemand AI...
       </div>
     );
   }
@@ -84,7 +84,7 @@ const AppContent: React.FC = () => {
     if (p === '/dashboard') return 'Dashboard';
     if (p === '/skills') return 'My Skills';
     if (p === '/tests') return 'Tests & Interview';
-    if (p === '/radar') return 'Workforce Radar';
+    if (p === '/jobs') return 'Jobs';
     if (p === '/roadmap') return 'Roadmap';
     return 'General';
   };
@@ -131,10 +131,10 @@ const AppContent: React.FC = () => {
               }
             />
             <Route
-              path="/radar"
+              path="/jobs"
               element={
                 <ProtectedRoute userProfile={userProfile}>
-                  <RadarPage />
+                  <JobsPage />
                 </ProtectedRoute>
               }
             />
@@ -157,7 +157,7 @@ const AppContent: React.FC = () => {
       {/* Minimal Footer */}
       <footer className="border-t border-slate-800/80 py-6 mt-12 bg-[#0a0d16]">
         <div className="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
-          AI Workforce Gap Radar &copy; 2026. Know what skills you need before the job market changes.
+          SkillDemand AI &copy; 2026. Know what skills you need before the job market changes.
         </div>
       </footer>
     </div>
