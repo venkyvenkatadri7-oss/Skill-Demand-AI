@@ -119,7 +119,14 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
 
     return await response.json();
   } catch (err: any) {
-    // Catch native fetch errors / static SPA rewrites on mobile browsers & static web hosts
+    // If a real backend URL is configured (production), never fall back to mock data.
+    // Throw the real error so the UI shows the actual problem.
+    const isProduction = !!import.meta.env.VITE_API_URL;
+    if (isProduction) {
+      throw err;
+    }
+
+    // Local dev fallback (no backend running) — demo/mock data below
     if (endpoint === '/auth/login' || endpoint === '/auth/register') {
       const demoToken = 'demo-session-token-mobile-123';
       setAuthToken(demoToken);
