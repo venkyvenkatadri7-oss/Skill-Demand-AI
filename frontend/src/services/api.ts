@@ -245,7 +245,79 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
         { skill_name: 'SQL', proficiency: 'Intermediate' }
       ] as unknown as T;
     }
-    if (endpoint.startsWith('/tests/questions') || endpoint.startsWith('/tests/progressive-prep')) {
+    if (endpoint.startsWith('/tests/progressive-prep')) {
+      return [
+        {
+          stage: 1,
+          title: 'Python Fundamentals',
+          questions: [
+            {
+              id: 101,
+              question_text: 'What is the primary difference between a List Comprehension and a Generator Expression in Python?',
+              options: [
+                'Generator Expressions compute items lazily in O(1) memory, while List Comprehensions evaluate all items into RAM.',
+                'List Comprehensions use less memory than Generator Expressions.',
+                'Generator Expressions create immutable tuples.',
+                'There is no difference.'
+              ],
+              correct_index: 0,
+              ai_explanation: 'Generator expressions use lazy evaluation, yielding items one at a time, making them memory-efficient for large datasets. List comprehensions store all items in memory immediately.'
+            },
+            {
+              id: 102,
+              question_text: 'Which Python keyword is used to define a generator function?',
+              options: ['return', 'yield', 'async', 'lambda'],
+              correct_index: 1,
+              ai_explanation: 'The "yield" keyword pauses a function and returns a value, making it a generator that resumes from where it left off on the next call.'
+            }
+          ]
+        },
+        {
+          stage: 2,
+          title: 'REST API & Architecture',
+          questions: [
+            {
+              id: 201,
+              question_text: 'What HTTP status code indicates a resource was successfully created?',
+              options: ['200 OK', '201 Created', '204 No Content', '302 Found'],
+              correct_index: 1,
+              ai_explanation: '201 Created is the standard REST response when a new resource is successfully created via POST request.'
+            },
+            {
+              id: 202,
+              question_text: 'Which of the following best describes idempotency in REST APIs?',
+              options: [
+                'The API always returns cached results.',
+                'Multiple identical requests produce the same result as a single request.',
+                'The API supports both GET and POST methods.',
+                'The API validates all input before processing.'
+              ],
+              correct_index: 1,
+              ai_explanation: 'Idempotency means that making the same request multiple times has the same effect as making it once. GET, PUT, and DELETE are idempotent; POST is not.'
+            }
+          ]
+        },
+        {
+          stage: 3,
+          title: 'System Design & Cloud',
+          questions: [
+            {
+              id: 301,
+              question_text: 'What is the primary purpose of a load balancer in a distributed system?',
+              options: [
+                'To encrypt traffic between services.',
+                'To distribute incoming requests across multiple servers.',
+                'To cache database queries.',
+                'To compress API responses.'
+              ],
+              correct_index: 1,
+              ai_explanation: 'A load balancer distributes incoming network traffic across multiple backend servers to ensure no single server is overwhelmed, improving availability and reliability.'
+            }
+          ]
+        }
+      ] as unknown as T;
+    }
+    if (endpoint.startsWith('/tests/questions')) {
       return [
         {
           id: 1,

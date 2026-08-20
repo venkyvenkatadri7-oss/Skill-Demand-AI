@@ -40,8 +40,8 @@ export function useDashboardData() {
 
   useEffect(() => {
     fetchAllData();
-    // Real-time synchronization polling interval (every 8 seconds)
-    const interval = setInterval(fetchAllData, 8000);
+    // Polling interval — 60s to avoid overloading free-tier backend
+    const interval = setInterval(fetchAllData, 60000);
     return () => clearInterval(interval);
   }, [fetchAllData]);
 
