@@ -99,17 +99,28 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
 
   const baseUrl = getApiBaseUrl();
 
+  // 45s timeout — gives Render free tier enough time to wake from cold start
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 45000);
+
   try {
     const response = await fetch(`${baseUrl}${endpoint}`, {
       ...options,
       headers,
+      signal: controller.signal,
     });
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       if (response.status === 401) {
         removeAuthToken();
       }
-      throw new Error(`Server returned HTTP ${response.status}`);
+      let detail = `Server returned HTTP ${response.status}`;
+      try {
+        const errBody = await response.json();
+        if (errBody?.detail) detail = errBody.detail;
+      } catch (_) {}
+      throw new Error(detail);
     }
 
     const contentType = response.headers.get('content-type');
@@ -119,6 +130,10 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
 
     return await response.json();
   } catch (err: any) {
+    clearTimeout(timeoutId);
+    if (err?.name === 'AbortError') {
+      throw new Error('Server is waking up — please wait a moment and try again.');
+    }
     // If a real backend URL is configured (production), never fall back to mock data.
     // Throw the real error so the UI shows the actual problem.
     const isProduction = !!import.meta.env.VITE_API_URL;
