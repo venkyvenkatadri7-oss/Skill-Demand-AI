@@ -11,7 +11,7 @@ import {
   HelpCircle,
   RefreshCw,
   ChevronDown,
-  MapPin,
+  Briefcase,
   Send,
   Radio,
   Upload,
@@ -335,12 +335,12 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ userProfile }) => 
           </button>
 
           <button
-            onClick={() => navigate('/radar')}
+            onClick={() => navigate('/jobs')}
             className="w-full py-3 px-4 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-2xl border border-slate-700 flex items-center justify-between transition-all group"
           >
             <div className="flex items-center gap-2.5">
-              <MapPin className="w-4 h-4 text-indigo-400" />
-              <span>Explore Workforce Radar Map</span>
+              <Briefcase className="w-4 h-4 text-indigo-400" />
+              <span>Browse Job Listings</span>
             </div>
             <ArrowRight className="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" />
           </button>
