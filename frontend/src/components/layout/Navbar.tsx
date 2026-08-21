@@ -33,9 +33,9 @@ export const Navbar: React.FC<NavbarProps> = ({ userProfile, onLogout, primaryTa
   const navItems = [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
     { name: 'My Skills', path: '/skills', icon: Award },
+    { name: 'Roadmap', path: '/roadmap', icon: Sparkles },
     { name: 'Tests & Interview', path: '/tests', icon: BookOpen },
     { name: 'Jobs', path: '/jobs', icon: Briefcase },
-    { name: 'Roadmap', path: '/roadmap', icon: Sparkles },
   ];
 
   return (
