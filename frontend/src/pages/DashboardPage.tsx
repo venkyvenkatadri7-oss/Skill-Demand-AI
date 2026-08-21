@@ -302,6 +302,17 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ userProfile }) => 
           <h3 className="text-base font-bold text-white mb-1">Recommended Next Actions</h3>
 
           <button
+            onClick={() => navigate('/roadmap')}
+            className="w-full py-3 px-4 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold text-xs rounded-2xl flex items-center justify-between transition-all shadow-lg shadow-indigo-600/20"
+          >
+            <div className="flex items-center gap-2.5">
+              <Compass className="w-4 h-4 text-white" />
+              <span>View Reskilling Roadmap</span>
+            </div>
+            <ArrowRight className="w-4 h-4 text-white" />
+          </button>
+
+          <button
             onClick={() => navigate('/tests')}
             className="w-full py-3 px-4 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-2xl border border-slate-700 flex items-center justify-between transition-all group"
           >
@@ -313,7 +324,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ userProfile }) => 
           </button>
 
           <button
-            onClick={() => navigate('/tests')}
+            onClick={() => navigate('/tests?tab=interview')}
             className="w-full py-3 px-4 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-2xl border border-slate-700 flex items-center justify-between transition-all group"
           >
             <div className="flex items-center gap-2.5">
@@ -321,17 +332,6 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ userProfile }) => 
               <span>AI Mock Interview</span>
             </div>
             <ArrowRight className="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" />
-          </button>
-
-          <button
-            onClick={() => navigate('/roadmap')}
-            className="w-full py-3 px-4 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold text-xs rounded-2xl flex items-center justify-between transition-all shadow-lg shadow-indigo-600/20"
-          >
-            <div className="flex items-center gap-2.5">
-              <Compass className="w-4 h-4 text-white" />
-              <span>View Reskilling Roadmap</span>
-            </div>
-            <ArrowRight className="w-4 h-4 text-white" />
           </button>
 
           <button
