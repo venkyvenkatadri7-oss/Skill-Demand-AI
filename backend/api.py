@@ -17,16 +17,17 @@ router = APIRouter(prefix="/api")
 def register(data: schemas.UserRegister, db: Session = Depends(get_db)):
     if data.password != data.confirm_password:
         raise HTTPException(status_code=400, detail="Passwords do not match")
-        
-    existing_user = db.query(models.User).filter(models.User.email == data.email).first()
+    
+    clean_email = data.email.strip().lower()
+    existing_user = db.query(models.User).filter(models.User.email == clean_email).first()
     if existing_user:
         raise HTTPException(status_code=400, detail="An account with this email already exists")
         
     hashed_pwd = hash_password(data.password)
     user = models.User(
-        email=data.email,
+        email=clean_email,
         password_hash=hashed_pwd,
-        full_name=data.full_name
+        full_name=data.full_name.strip()
     )
     db.add(user)
     db.commit()
@@ -62,7 +63,8 @@ def register(data: schemas.UserRegister, db: Session = Depends(get_db)):
 
 @router.post("/auth/login", response_model=schemas.Token)
 def login(data: schemas.UserLogin, db: Session = Depends(get_db)):
-    user = db.query(models.User).filter(models.User.email == data.email).first()
+    clean_email = data.email.strip().lower()
+    user = db.query(models.User).filter(models.User.email == clean_email).first()
     if not user or not verify_password(data.password, user.password_hash):
         raise HTTPException(status_code=401, detail="Invalid email or password")
         

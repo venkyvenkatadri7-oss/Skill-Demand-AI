@@ -47,9 +47,6 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onAuthSuccess }) => {
     setError(null);
     setLoading(true);
 
-    if (email) localStorage.setItem('active_user_email', email);
-    if (fullName) localStorage.setItem('active_user_name', fullName);
-
     if (isRegister) {
       if (!fullName.trim()) { setLoading(false); return setError('Please enter your full name'); }
       if (!email.includes('@')) { setLoading(false); return setError('Please enter a valid email address'); }
@@ -57,19 +54,20 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onAuthSuccess }) => {
       if (password !== confirmPassword) { setLoading(false); return setError('Passwords do not match'); }
 
       try {
-        const res = await Promise.race([
-          api.register({ full_name: fullName, email, password, confirm_password: confirmPassword }),
-          new Promise((resolve) => setTimeout(() => resolve({ access_token: 'demo-session-token-mobile-123' }), 1500))
-        ]);
-        const token = (res as any)?.access_token || 'demo-session-token-mobile-123';
-        saveAccount(email, fullName, token, 'Candidate');
+        const res = await api.register({ full_name: fullName.trim(), email: email.trim().toLowerCase(), password, confirm_password: confirmPassword });
+        const token = res?.access_token;
+        if (!token) throw new Error('No token received from server');
+        const name = (res as any)?.full_name || fullName.trim();
+        const userEmail = (res as any)?.email || email.trim().toLowerCase();
+        localStorage.setItem('active_user_email', userEmail);
+        localStorage.setItem('active_user_name', name);
+        saveAccount(userEmail, name, token, 'Candidate');
         setAuthToken(token);
-      } catch (_) {
-        saveAccount(email, fullName, 'demo-session-token-mobile-123', 'Candidate');
-        setAuthToken('demo-session-token-mobile-123');
-      } finally {
         onAuthSuccess();
         navigate('/onboarding');
+      } catch (err: any) {
+        setError(err?.message || 'Registration failed. Please try again.');
+      } finally {
         setLoading(false);
       }
     } else {
@@ -77,19 +75,20 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onAuthSuccess }) => {
       if (!password) { setLoading(false); return setError('Please enter your password'); }
 
       try {
-        const res = await Promise.race([
-          api.login({ email, password }),
-          new Promise((resolve) => setTimeout(() => resolve({ access_token: 'demo-session-token-mobile-123' }), 1500))
-        ]);
-        const token = (res as any)?.access_token || 'demo-session-token-mobile-123';
-        saveAccount(email, email.split('@')[0], token, 'Candidate');
+        const res = await api.login({ email: email.trim().toLowerCase(), password });
+        const token = res?.access_token;
+        if (!token) throw new Error('No token received from server');
+        const name = (res as any)?.full_name || email.split('@')[0];
+        const userEmail = (res as any)?.email || email.trim().toLowerCase();
+        localStorage.setItem('active_user_email', userEmail);
+        localStorage.setItem('active_user_name', name);
+        saveAccount(userEmail, name, token, 'Candidate');
         setAuthToken(token);
-      } catch (_) {
-        saveAccount(email, email.split('@')[0], 'demo-session-token-mobile-123', 'Candidate');
-        setAuthToken('demo-session-token-mobile-123');
-      } finally {
         onAuthSuccess();
         navigate('/dashboard');
+      } catch (err: any) {
+        setError(err?.message || 'Login failed. Please check your email and password.');
+      } finally {
         setLoading(false);
       }
     }
